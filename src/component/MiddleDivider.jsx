@@ -6,27 +6,44 @@ import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
-import { Avatar } from "@mui/material";
-import { deepOrange } from "@mui/material/colors";
+import { Rating } from "@mui/material";
 
-export default function MiddleDividers({
-  text,
-  average,
-  genres,
-  homepage,
-  companies,
-}) {
+export default function MiddleDividers({ details }) {
+  const text = details.overview;
+  const average = details.vote_average;
+  const genres = details.genres;
+  const homepage = details.homepage;
+  const companies = details.production_companies;
+  const popularity = details.popularity;
+  const votes = details.vote_count;
+
   return (
     <Box sx={{ width: "100%", maxWidth: 1200, bgcolor: "background.paper" }}>
       <Box sx={{ my: 3, mx: 2, py: 3 }}>
         <Grid container alignItems="center">
-          <Grid item>
-            <Avatar sx={{ bgcolor: deepOrange[700], width: 56, height: 56 }}>
-              {average}
-            </Avatar>
-          </Grid>
           <Grid item xs>
-            <Typography gutterBottom variant="h4" component="div">
+            {"Likes "}
+            <Chip label={popularity} />
+          </Grid>
+          <Grid item>
+            <Typography gutterBottom variant="h5" component="div">
+              {"Votes "}
+              <Chip label={votes} />
+              {average && (
+                <Rating
+                  name="customized-10"
+                  defaultValue={average}
+                  max={10}
+                  readOnly
+                />
+              )}
+            </Typography>
+          </Grid>
+        </Grid>
+
+        <Grid container alignItems="center">
+          <Grid item xs>
+            <Typography gutterBottom variant="h5" component="div">
               Synopsis
             </Typography>
           </Grid>
@@ -57,7 +74,7 @@ export default function MiddleDividers({
           <div className="flex justify-around  flex-wrap w-full">
             {companies &&
               companies.map((genres) => {
-                const { id, name, logo_path } = genres;
+                const { id, logo_path } = genres;
 
                 return (
                   <div key={id} className="flex items-center p-2">

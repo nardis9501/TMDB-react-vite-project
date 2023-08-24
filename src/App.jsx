@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
-import { data } from "autoprefixer";
 import MovieCard from "./component/MovieCard";
+import { Button, Chip } from "@mui/material";
 
 function App() {
   const [movies, setMovies] = useState([]);
   const [url, setUrl] = useState();
   const [fetchOk, setFetchOk] = useState(0);
+  const [page, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState();
+
   // API's Autentication
   const options = {
     method: "GET",
@@ -21,10 +22,11 @@ function App() {
 
   useEffect(() => {
     // get popular movie list
-    fetch("https://api.themoviedb.org/3/movie/popular", options)
+    fetch(`https://api.themoviedb.org/3/movie/popular?page=${page}`, options)
       .then((response) => response.json())
       .then((data) => {
         setMovies(data.results);
+        setTotalPage(data.total_pages);
       })
       .catch((err) => console.error(err));
 
@@ -43,7 +45,21 @@ function App() {
         setFetchOk(1);
       })
       .catch((err) => console.error(err));
-  }, []);
+  }, [page]);
+
+  // const handlerDisabled = () => {};
+
+  const nextHandlerClick = () => {
+    if (page <= totalPage - 1) {
+      setPage(page + 1);
+    }
+  };
+
+  const previousHandlerClick = () => {
+    if (page >= 2) {
+      setPage(page - 1);
+    }
+  };
 
   return (
     <>
@@ -56,6 +72,20 @@ function App() {
             <div className="grid lg:grid-cols-2 gap-5 sm:gap-3 lg:gap-7 place-content-center">
               <MovieCard movies={movies} apiUrl={url} />
             </div>
+          </div>
+          <div className="flex place-content-center items-center h-14 fixed bottom-0 left-0 right-0 backdrop-blur  bg-slate-200/40">
+            <Button onClick={previousHandlerClick} variant="contained">
+              <p className="text-xl">-</p>
+            </Button>
+            <p className="px-5">
+              page:
+              <Chip label={page} />/
+              <Chip label={totalPage} />
+            </p>
+
+            <Button onClick={nextHandlerClick} variant="contained">
+              <p className="text-xl">+</p>
+            </Button>
           </div>
         </section>
       ) : (

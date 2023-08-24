@@ -1,18 +1,8 @@
-import { useEffect, useState } from "react";
-import MovieDetails from "./MovieDetails";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Avatar, Button } from "@mui/material";
 import { deepOrange } from "@mui/material/colors";
 
-export default function MoviesList({ movies, apiUrl, id, movieDetails }) {
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NTBmZDgwODBlNmZiYjczMmNmMjZhYmM1YzY1ZmZmYyIsInN1YiI6IjY0ZTNjYWExYzYxM2NlMDEyY2MyZGZiNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.4n4C-p_jUrqoCkgkqVoOC5Rb6TevKaPGVJvpV6oSCn0",
-    },
-  };
+export default function MoviesList({ movies, apiUrl }) {
   return (
     <>
       {movies &&
@@ -24,7 +14,6 @@ export default function MoviesList({ movies, apiUrl, id, movieDetails }) {
               key={movie.id}
               className="md:flex max-w-xs mx-auto shadow-2xl shadow-bg-gray-50 bg-gray-50 hover:bg-blue-100 rounded-xl overflow-hidden md:max-w-2xl"
             >
-              {/* <div className="md:flex"> */}
               <div className="md:shrink-0">
                 <img
                   className="h-40 w-full object-cover md:h-full md:w-52"
@@ -55,7 +44,6 @@ export default function MoviesList({ movies, apiUrl, id, movieDetails }) {
                   More
                 </Button>
               </div>
-              {/* </div> */}
             </section>
           );
         })}

@@ -24,7 +24,6 @@ export default function MovieDetails() {
       })
       .catch((err) => console.error(err));
   }, []);
-  const average = details.vote_average;
 
   return (
     <>
@@ -64,8 +63,7 @@ export default function MovieDetails() {
           </section>
           <section>
             <MiddleDividers
-              text={details.overview}
-              average={average}
+              details={details}
               genres={details.genres}
               homepage={details.homepage}
               companies={details.production_companies}

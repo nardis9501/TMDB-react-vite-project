@@ -17,6 +17,8 @@ export default function MiddleDividers({ details }) {
   const popularity = details.popularity;
   const votes = details.vote_count;
 
+  console.log(companies != 0);
+
   return (
     <Box sx={{ width: "100%", maxWidth: 1200, bgcolor: "background.paper" }}>
       <Box sx={{ my: 3, mx: 2, py: 3 }}>
@@ -66,14 +68,14 @@ export default function MiddleDividers({ details }) {
       </Box>
       <Divider variant="middle" />
 
-      <Box sx={{ m: 2 }}>
-        <Typography gutterBottom variant="body1">
-          Production companies
-        </Typography>
-        <Stack direction="row" spacing={1}>
-          <div className="flex justify-around  flex-wrap w-full">
-            {companies &&
-              companies.map((genres) => {
+      {companies != 0 && (
+        <Box sx={{ m: 2 }}>
+          <Typography gutterBottom variant="body1">
+            Production companies
+          </Typography>
+          <Stack direction="row" spacing={1}>
+            <div className="flex justify-around  flex-wrap w-full">
+              {companies.map((genres) => {
                 const { id, logo_path } = genres;
 
                 return (
@@ -86,9 +88,10 @@ export default function MiddleDividers({ details }) {
                   </div>
                 );
               })}
-          </div>
-        </Stack>
-      </Box>
+            </div>
+          </Stack>
+        </Box>
+      )}
       <Box sx={{ mt: 3, ml: 1, mb: 1 }}>
         <Button href={homepage}>Movie Homepage</Button>
       </Box>

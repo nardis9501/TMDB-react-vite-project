@@ -22,8 +22,10 @@ export default function MovieDetails() {
         setDetails(response);
         setFetchOk(1);
       })
-      .catch((err) => console.error(err));
-  }, []);
+      .catch((err) => {
+        console.error(err), alert(err.message);
+      });
+  }, [movieId]);
 
   return (
     <>

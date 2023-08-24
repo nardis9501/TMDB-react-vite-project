@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Avatar, Button } from "@mui/material";
 import { deepOrange } from "@mui/material/colors";
 
-export default function MoviesList({ movies, apiUrl }) {
+export default function MoviesList({ movies, apiUrl, imgIsLoading }) {
   return (
     <>
       {movies &&
@@ -15,11 +15,15 @@ export default function MoviesList({ movies, apiUrl }) {
               className="md:flex max-w-xs mx-auto shadow-2xl shadow-bg-gray-50 bg-gray-50 hover:bg-blue-100 rounded-xl overflow-hidden md:max-w-2xl"
             >
               <div className="md:shrink-0">
-                <img
-                  className="h-40 w-full object-cover md:h-full md:w-52"
-                  src={`${apiUrl}${movie.poster_path}`}
-                  alt={movie.title}
-                />
+                {imgIsLoading ? (
+                  <h1>loading...</h1>
+                ) : (
+                  <img
+                    className="h-40 w-full object-cover md:h-full md:w-52"
+                    src={`${apiUrl}${movie.poster_path}`}
+                    alt={movie.title}
+                  />
+                )}
               </div>
               <div className="p-4">
                 <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">

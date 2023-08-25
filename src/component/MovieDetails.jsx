@@ -2,18 +2,12 @@ import React, { useEffect, useState } from "react";
 import tmdb from "../../public/tmdb.svg";
 import { useParams } from "react-router-dom";
 import MiddleDividers from "./MiddleDivider";
+import { options } from "../keys/key";
+
 export default function MovieDetails() {
   const [details, setDetails] = useState([]);
   const [fetchOk, setFetchOk] = useState(0); //fetch OK? tru=>1, false=>0
   const { movieId } = useParams(); //get dynamic segment od URL
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NTBmZDgwODBlNmZiYjczMmNmMjZhYmM1YzY1ZmZmYyIsInN1YiI6IjY0ZTNjYWExYzYxM2NlMDEyY2MyZGZiNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.4n4C-p_jUrqoCkgkqVoOC5Rb6TevKaPGVJvpV6oSCn0",
-    },
-  };
 
   useEffect(() => {
     fetch(`https://api.themoviedb.org/3/movie/${movieId}`, options)

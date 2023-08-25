@@ -17,8 +17,6 @@ export default function MiddleDividers({ details }) {
   const popularity = details.popularity;
   const votes = details.vote_count;
 
-  console.log(companies != 0);
-
   return (
     <Box sx={{ width: "100%", maxWidth: 1200, bgcolor: "background.paper" }}>
       <Box sx={{ my: 3, mx: 2, py: 3 }}>

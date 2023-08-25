@@ -13,14 +13,12 @@ function App() {
   const [imgIsLoading, setImgIsLoading] = useState();
 
   // API's Autentication
-  // Login  https://developers.themoviedb.org/
-  // get an options key
-  // const options = {
+  // Login https://developers.themoviedb.org/ get an options key and save in ./src/keys/key.jsx. It's look like this (copy it and replace the access token value):
+  // export const options = {
   //   method: "GET",
   //   headers: {
   //     accept: "application/json",
-  //     Authorization:
-  //       "Bearer eyJhbGciOp_jUrqoCkgkqVoOC5Rb6TevKaPGVJvpV6oSCn0",
+  //     Authorization: "Bearer {API read access token}", //example => Authorization: "Bearer eyJhbGciOp_jUrqoCkgkqVoOC5Rb6TevKaPGVJvpV6oSCn0",
   //   },
   // };
 

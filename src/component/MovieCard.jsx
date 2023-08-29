@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Avatar, Button } from "@mui/material";
 import { deepOrange } from "@mui/material/colors";
 
-export default function MoviesList({ movies, apiUrl, imgIsLoading }) {
+export default function MovieCard({ movies, apiUrl, imgIsLoading }) {
   return (
     <>
       {movies &&

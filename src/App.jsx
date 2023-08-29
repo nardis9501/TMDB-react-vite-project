@@ -87,7 +87,11 @@ function App() {
             </div>
           </div>
           <div className="flex place-content-center items-center h-14 fixed bottom-0 left-0 right-0 backdrop-blur  bg-slate-200/40">
-            <Button onClick={previousHandlerClick} variant="contained">
+            <Button
+              onClick={previousHandlerClick}
+              variant="contained"
+              disabled={page === 1}
+            >
               <p className="text-xl">-</p>
             </Button>
             <div className="px-5">
@@ -96,7 +100,11 @@ function App() {
               <Chip label={totalPage} />
             </div>
 
-            <Button onClick={nextHandlerClick} variant="contained">
+            <Button
+              onClick={nextHandlerClick}
+              variant="contained"
+              disabled={page === totalPage}
+            >
               <p className="text-xl">+</p>
             </Button>
           </div>

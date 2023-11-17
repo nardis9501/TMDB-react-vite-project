@@ -6,10 +6,10 @@ import { options } from "../keys/key";
 export default function HomePage() {
   const [movies, setMovies] = useState([]);
   const [url, setUrl] = useState();
-  const [isLoading, setIsLoading] = useState();
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState();
-  const [imgIsLoading, setImgIsLoading] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+  const [imgIsLoading, setImgIsLoading] = useState(false);
 
   useEffect(() => {
     // get popular movie list
@@ -19,9 +19,11 @@ export default function HomePage() {
       .then((data) => {
         setMovies(data.results);
         setTotalPage(data.total_pages);
-        setIsLoading(false);
       })
-      .catch((err) => (console.error(err), alert(err.message)));
+      .catch((err) => (console.error(err), alert(err.message)))
+      .finally(() => {
+        setIsLoading(false);
+      });
 
     //  to build an image URL:
     // get a base_url, a file_size and a file_path
@@ -36,10 +38,12 @@ export default function HomePage() {
         const url = `${base_url}${backdrop_sizes[0]}`;
 
         setUrl(url);
-        setImgIsLoading(false);
       })
       .catch((err) => {
         console.error(err), alert(err.message);
+      })
+      .finally(() => {
+        setImgIsLoading(false);
       });
   }, [page]);
 

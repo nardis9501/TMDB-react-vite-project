@@ -3,6 +3,9 @@ import { Avatar, Button } from "@mui/material";
 import { deepOrange } from "@mui/material/colors";
 
 export default function MovieCard({ movies, apiUrl, imgIsLoading }) {
+  const findReleaseYear = (release_date) => {
+    return release_date.split("", 4);
+  };
   return (
     <>
       {movies &&
@@ -26,12 +29,15 @@ export default function MovieCard({ movies, apiUrl, imgIsLoading }) {
                 )}
               </div>
               <div className="p-4">
-                <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
+                <div className="flex items-center place-content-between uppercase tracking-wide text-sm text-indigo-500 font-semibold">
                   <Avatar
                     sx={{ bgcolor: deepOrange[300], width: 56, height: 56 }}
                   >
                     {movie.vote_average}
                   </Avatar>
+                  <span className="text-[#646cff] text-xl">
+                    {findReleaseYear(movie.release_date)}
+                  </span>
                 </div>
                 <Link
                   to={`movie-details/${movie.id}`}

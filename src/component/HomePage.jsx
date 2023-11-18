@@ -10,7 +10,6 @@ export default function HomePage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState();
   const [isLoading, setIsLoading] = useState(false);
-  const [imgIsLoading, setImgIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const [imgError, setImgError] = useState(false);
 
@@ -43,7 +42,6 @@ export default function HomePage() {
     //  to build an image URL:
     // get a base_url, a file_size and a file_path
     // file_path is from popular movie list
-    setImgIsLoading(true);
     fetch("https://api.themoviedb.org/3/configuration", options)
       .then((response) => {
         if (!response.ok)
@@ -63,10 +61,6 @@ export default function HomePage() {
       .catch((err) => {
         setImgError(err);
         console.error(err);
-      })
-      .finally(() => {
-        setImgIsLoading(false);
-        setImgError(false);
       });
   }, [currentPage]);
 
@@ -97,11 +91,7 @@ export default function HomePage() {
         <EarlyReturn isLoading={isLoading} error={error} movies={movies} />
         <div className="grid gap-3">
           <div className="grid lg:grid-cols-2 gap-5 sm:gap-3 lg:gap-7 place-content-center">
-            <MovieCard
-              movies={movies}
-              apiUrl={url}
-              imgIsLoading={imgIsLoading}
-            />
+            <MovieCard movies={movies} apiUrl={url} imgError={imgError} />
           </div>
         </div>
         <div className="flex place-content-center items-center h-14 fixed bottom-0 left-0 right-0 backdrop-blur  bg-slate-200/40">

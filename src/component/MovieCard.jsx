@@ -2,14 +2,14 @@ import { Link } from "react-router-dom";
 import { Avatar, Button } from "@mui/material";
 import { deepOrange } from "@mui/material/colors";
 
-export default function MovieCard({ movies, apiUrl, imgIsLoading }) {
+export default function MovieCard({ movies, apiUrl, imgError }) {
   const findReleaseYear = (release_date) => {
     return release_date.split("", 4);
   };
   return (
     <>
       {movies &&
-        movies.slice(0, 20).map((movie) => {
+        movies.map((movie) => {
           const text = movie.overview.split(" ", 21).join(" ");
 
           return (
@@ -18,13 +18,13 @@ export default function MovieCard({ movies, apiUrl, imgIsLoading }) {
               className="md:flex max-w-xs mx-auto shadow-2xl shadow-bg-gray-50 bg-gray-50 hover:bg-blue-100 rounded-xl overflow-hidden md:max-w-2xl"
             >
               <div className="md:shrink-0">
-                {imgIsLoading ? (
-                  <h1>loading...</h1>
+                {imgError ? (
+                  <p className="p-2">An error occurred while loading images</p>
                 ) : (
                   <img
                     className="h-40 w-full object-cover md:h-full md:w-52"
                     src={`${apiUrl}${movie.poster_path}`}
-                    alt={movie.title}
+                    alt={movie.title + " picture"}
                   />
                 )}
               </div>

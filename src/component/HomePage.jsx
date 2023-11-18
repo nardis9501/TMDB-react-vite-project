@@ -7,7 +7,7 @@ import EarlyReturn from "./EarlyReturn";
 export default function HomePage() {
   const [movies, setMovies] = useState([]);
   const [url, setUrl] = useState();
-  const [page, setPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [imgIsLoading, setImgIsLoading] = useState(false);
@@ -17,7 +17,10 @@ export default function HomePage() {
   useEffect(() => {
     // get popular movie list
     setIsLoading(true);
-    fetch(`https://api.themoviedb.org/3/movie/popular?page=${page}`, options)
+    fetch(
+      `https://api.themoviedb.org/3/movie/popular?page=${currentPage}`,
+      options
+    )
       .then((response) => {
         if (!response.ok)
           throw new Error(
@@ -65,19 +68,19 @@ export default function HomePage() {
         setImgIsLoading(false);
         setImgError(false);
       });
-  }, [page]);
+  }, [currentPage]);
 
   // const handlerDisabled = () => {};
 
   const nextHandlerClick = () => {
-    if (page <= totalPage - 1) {
-      setPage(page + 1);
+    if (currentPage <= totalPage - 1) {
+      setCurrentPage(currentPage + 1);
     }
   };
 
   const previousHandlerClick = () => {
-    if (page >= 2) {
-      setPage(page - 1);
+    if (currentPage >= 2) {
+      setCurrentPage(currentPage - 1);
     }
   };
 
@@ -105,20 +108,20 @@ export default function HomePage() {
           <Button
             onClick={previousHandlerClick}
             variant="contained"
-            disabled={page === 1}
+            disabled={currentPage === 1}
           >
             <p className="text-xl">-</p>
           </Button>
           <div className="px-5">
-            page:
-            <Chip label={page} />/
+            Page:
+            <Chip label={currentPage} />/
             <Chip label={totalPage} />
           </div>
 
           <Button
             onClick={nextHandlerClick}
             variant="contained"
-            disabled={page === totalPage}
+            disabled={currentPage === totalPage}
           >
             <p className="text-xl">+</p>
           </Button>

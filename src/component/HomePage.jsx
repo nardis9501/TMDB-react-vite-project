@@ -28,7 +28,7 @@ export default function HomePage() {
         return response.json();
       })
       .then((data) => {
-        setMovies(data.results);
+        setMovies((prevMovies) => prevMovies.concat(data.results));
         setTotalPage(data.total_pages);
       })
       .catch((err) => {
@@ -72,12 +72,6 @@ export default function HomePage() {
     }
   };
 
-  const previousHandlerClick = () => {
-    if (currentPage >= 2) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
-
   return (
     <>
       <header className="my-4">
@@ -88,34 +82,24 @@ export default function HomePage() {
         <h3 className="text-white/70 font-bold text-2xl">Popular movies</h3>
       </header>
       <section>
-        <div className="grid gap-3">
-          <div className="grid lg:grid-cols-2 gap-5 sm:gap-3 lg:gap-7 place-content-center">
+        <div className="gap-3 place-content-center">
+          <div className="grid mb-5 lg:grid-cols-2 gap-5 sm:gap-3 lg:gap-7 place-content-center">
             <MovieCard movies={movies} apiUrl={url} imgError={imgError} />
           </div>
           <EarlyReturn isLoading={isLoading} error={error} movies={movies} />
-        </div>
-        <div className="flex place-content-center items-center h-14 fixed bottom-0 left-0 right-0 backdrop-blur  bg-slate-200/40">
-          <Button
-            onClick={previousHandlerClick}
-            variant="contained"
-            disabled={currentPage === 1}
-          >
-            <p className="text-xl">-</p>
-          </Button>
-          <div className="px-5">
-            Page:
-            <Chip label={currentPage} />/
-            <Chip label={totalPage} />
-          </div>
 
-          <Button
-            onClick={nextHandlerClick}
-            variant="contained"
-            disabled={currentPage === totalPage}
-          >
-            <p className="text-xl">+</p>
-          </Button>
+          {!isLoading && (
+            <Button
+              className="w-2/3"
+              onClick={nextHandlerClick}
+              variant="contained"
+              disabled={currentPage === totalPage}
+            >
+              <p className="text-xl">Upload more results</p>
+            </Button>
+          )}
         </div>
+        <div className="flex place-content-center items-center h-14 fixed bottom-0 left-0 right-0 backdrop-blur  bg-slate-200/40"></div>
       </section>
     </>
   );

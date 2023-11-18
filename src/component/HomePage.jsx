@@ -88,11 +88,11 @@ export default function HomePage() {
         <h3 className="text-white/70 font-bold text-2xl">Popular movies</h3>
       </header>
       <section>
-        <EarlyReturn isLoading={isLoading} error={error} movies={movies} />
         <div className="grid gap-3">
           <div className="grid lg:grid-cols-2 gap-5 sm:gap-3 lg:gap-7 place-content-center">
             <MovieCard movies={movies} apiUrl={url} imgError={imgError} />
           </div>
+          <EarlyReturn isLoading={isLoading} error={error} movies={movies} />
         </div>
         <div className="flex place-content-center items-center h-14 fixed bottom-0 left-0 right-0 backdrop-blur  bg-slate-200/40">
           <Button

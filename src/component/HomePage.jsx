@@ -99,9 +99,9 @@ export default function HomePage() {
             </Button>
           )}
         </div>
-        <div className="flex place-content-center items-center h-14 fixed bottom-0 left-0 right-0 backdrop-blur text-slate-900 bg-slate-200/40">
+        <footer className="flex place-content-center items-center h-14 fixed bottom-0 left-0 right-0 backdrop-blur text-slate-900 bg-slate-200/40">
           © Copyright 2023
-        </div>
+        </footer>
       </section>
     </>
   );

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, Chip } from "@mui/material";
 import MovieCard from "./MovieCard";
 import { options } from "../keys/key";
+import EarlyReturn from "./EarlyReturn";
 
 export default function HomePage() {
   const [movies, setMovies] = useState([]);
@@ -10,17 +11,28 @@ export default function HomePage() {
   const [totalPage, setTotalPage] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [imgIsLoading, setImgIsLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [imgError, setImgError] = useState(false);
 
   useEffect(() => {
     // get popular movie list
     setIsLoading(true);
     fetch(`https://api.themoviedb.org/3/movie/popular?page=${page}`, options)
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok)
+          throw new Error(
+            "An error occurred while loading movies from the API"
+          );
+        return response.json();
+      })
       .then((data) => {
         setMovies(data.results);
         setTotalPage(data.total_pages);
       })
-      .catch((err) => (console.error(err), alert(err.message)))
+      .catch((err) => {
+        setError(err);
+        console.log(err);
+      })
       .finally(() => {
         setIsLoading(false);
       });
@@ -30,7 +42,13 @@ export default function HomePage() {
     // file_path is from popular movie list
     setImgIsLoading(true);
     fetch("https://api.themoviedb.org/3/configuration", options)
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok)
+          throw new Error(
+            "An error occurred while loading images from the API"
+          );
+        return response.json();
+      })
       .then((response) => {
         const { images } = response;
         const { base_url } = images;
@@ -40,10 +58,12 @@ export default function HomePage() {
         setUrl(url);
       })
       .catch((err) => {
-        console.error(err), alert(err.message);
+        setImgError(err);
+        console.error(err);
       })
       .finally(() => {
         setImgIsLoading(false);
+        setImgError(false);
       });
   }, [page]);
 
@@ -63,46 +83,47 @@ export default function HomePage() {
 
   return (
     <>
-      {isLoading ? (
-        <h1>Loading...</h1>
-      ) : (
-        <section>
-          <h2 className="text-white/70 text-2xl">Welcome to </h2>
-          <h1 className="mb-3 text-white/95">The Movie Database</h1>
-          <div className="grid gap-3">
-            <h3 className="text-white/70 font-bold text-2xl">Popular movies</h3>
-            <div className="grid lg:grid-cols-2 gap-5 sm:gap-3 lg:gap-7 place-content-center">
-              <MovieCard
-                movies={movies}
-                apiUrl={url}
-                imgIsLoading={imgIsLoading}
-              />
-            </div>
+      <header className="my-4">
+        <h2 className="text-white/70 text-2xl">Welcome to </h2>
+        <h1 className="mb-3 text-4xl lg:text-6xl text-white/95">
+          The Movie Database
+        </h1>
+        <h3 className="text-white/70 font-bold text-2xl">Popular movies</h3>
+      </header>
+      <section>
+        <EarlyReturn isLoading={isLoading} error={error} movies={movies} />
+        <div className="grid gap-3">
+          <div className="grid lg:grid-cols-2 gap-5 sm:gap-3 lg:gap-7 place-content-center">
+            <MovieCard
+              movies={movies}
+              apiUrl={url}
+              imgIsLoading={imgIsLoading}
+            />
           </div>
-          <div className="flex place-content-center items-center h-14 fixed bottom-0 left-0 right-0 backdrop-blur  bg-slate-200/40">
-            <Button
-              onClick={previousHandlerClick}
-              variant="contained"
-              disabled={page === 1}
-            >
-              <p className="text-xl">-</p>
-            </Button>
-            <div className="px-5">
-              page:
-              <Chip label={page} />/
-              <Chip label={totalPage} />
-            </div>
+        </div>
+        <div className="flex place-content-center items-center h-14 fixed bottom-0 left-0 right-0 backdrop-blur  bg-slate-200/40">
+          <Button
+            onClick={previousHandlerClick}
+            variant="contained"
+            disabled={page === 1}
+          >
+            <p className="text-xl">-</p>
+          </Button>
+          <div className="px-5">
+            page:
+            <Chip label={page} />/
+            <Chip label={totalPage} />
+          </div>
 
-            <Button
-              onClick={nextHandlerClick}
-              variant="contained"
-              disabled={page === totalPage}
-            >
-              <p className="text-xl">+</p>
-            </Button>
-          </div>
-        </section>
-      )}
+          <Button
+            onClick={nextHandlerClick}
+            variant="contained"
+            disabled={page === totalPage}
+          >
+            <p className="text-xl">+</p>
+          </Button>
+        </div>
+      </section>
     </>
   );
 }

@@ -17,7 +17,7 @@ export default function MiddleDividers({ details }) {
   const votes = details.vote_count;
 
   return (
-    <Box sx={{ width: "100%", maxWidth: 1200, bgcolor: "background.paper" }}>
+    <Box sx={{ width: "100%", maxWidth: "100%", bgcolor: "background.paper" }}>
       <Box sx={{ my: 3, mx: 2, py: 3 }}>
         <Grid container alignItems="center">
           <Grid item xs>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Chip } from "@mui/material";
+import { Button } from "@mui/material";
 import MovieCard from "./MovieCard";
 import { options } from "../keys/key";
 import EarlyReturn from "./EarlyReturn";

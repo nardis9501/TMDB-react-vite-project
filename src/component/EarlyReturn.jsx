@@ -1,4 +1,4 @@
-export default function EarlyReturn({ children, isLoading, error, movies }) {
+export default function EarlyReturn({ children, isLoading, error, data }) {
   if (isLoading) {
     return <p>Loading...</p>;
   }
@@ -9,7 +9,7 @@ export default function EarlyReturn({ children, isLoading, error, movies }) {
       </p>
     );
   }
-  if (movies && movies.length === 0) {
+  if (data && data.length === 0) {
     return <p>No available at this time</p>;
   }
   return <>{children}</>;

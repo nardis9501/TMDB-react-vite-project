@@ -88,7 +88,7 @@ export default function HomePage() {
           </div>
 
           <div className="my-4">
-            <EarlyReturn isLoading={isLoading} error={error} movies={movies}>
+            <EarlyReturn isLoading={isLoading} error={error} data={movies}>
               <Button
                 className="w-2/3"
                 onClick={nextHandlerClick}

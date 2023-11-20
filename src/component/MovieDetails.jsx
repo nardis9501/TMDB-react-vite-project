@@ -37,7 +37,7 @@ export default function MovieDetails() {
       <header className="flex flex-row-reverse">
         <img className="w-3/12" src={tmdb} alt="TMDB logo" />
       </header>
-      <EarlyReturn isLoading={isLoading}>
+      <EarlyReturn isLoading={isLoading} error={error} data={details}>
         <section className="content-center">
           <div className="flex place-content-between">
             <div className="">

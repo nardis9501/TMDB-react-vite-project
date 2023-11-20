@@ -83,19 +83,22 @@ export default function HomePage() {
       </header>
       <section>
         <div className="gap-3 place-content-center">
-          <div className="grid mb-5 lg:grid-cols-2 gap-5 sm:gap-3 lg:gap-7 place-content-center">
+          <div className="grid lg:grid-cols-2 gap-5 sm:gap-3 lg:gap-7 place-content-center">
             <MovieCard movies={movies} apiUrl={url} imgError={imgError} />
           </div>
-          <EarlyReturn isLoading={isLoading} error={error} movies={movies}>
-            <Button
-              className="w-2/3"
-              onClick={nextHandlerClick}
-              variant="contained"
-              disabled={currentPage === totalPage}
-            >
-              <p className="text-xl">Upload more results</p>
-            </Button>
-          </EarlyReturn>
+
+          <div className="my-4">
+            <EarlyReturn isLoading={isLoading} error={error} movies={movies}>
+              <Button
+                className="w-2/3"
+                onClick={nextHandlerClick}
+                variant="contained"
+                disabled={currentPage === totalPage}
+              >
+                <p className="text-xl">Upload more results</p>
+              </Button>
+            </EarlyReturn>
+          </div>
         </div>
         <footer className="flex place-content-center items-center h-14 fixed bottom-0 left-0 right-0 backdrop-blur text-slate-900 bg-slate-200/40">
           © Copyright 2023

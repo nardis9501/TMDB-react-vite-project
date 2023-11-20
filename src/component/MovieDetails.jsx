@@ -16,7 +16,7 @@ export default function MovieDetails() {
       .then((response) => {
         if (!response.ok)
           throw new Error(
-            "An error occurred while loading movies from the API"
+            "An error occurred while loading the information of this movie from the API."
           );
         return response.json();
       })

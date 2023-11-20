@@ -33,7 +33,7 @@ export default function MovieCard({ movies, apiUrl, imgError }) {
                   <Avatar
                     sx={{ bgcolor: deepOrange[300], width: 56, height: 56 }}
                   >
-                    {movie.vote_average}
+                    {movie.vote_average.toFixed(1)}
                   </Avatar>
                   <span className="text-[#646cff] text-xl">
                     {findReleaseYear(movie.release_date)}

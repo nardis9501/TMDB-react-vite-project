@@ -15,7 +15,7 @@ export default function MovieCard({ movies, apiUrl, imgError }) {
           return (
             <section
               key={movie.id}
-              className="md:flex max-w-xs mx-auto shadow-2xl shadow-bg-gray-50 bg-gray-50 hover:bg-blue-100 rounded-xl overflow-hidden md:max-w-2xl"
+              className="md:flex max-w-xs mx-auto shadow-2xl shadow-bg-gray-50 hover:dark:bg-blue-950 dark:bg-gray-900 bg-gray-50 hover:bg-blue-100 rounded-xl overflow-hidden md:max-w-2xl"
             >
               <div className="md:shrink-0">
                 {imgError ? (
@@ -41,7 +41,7 @@ export default function MovieCard({ movies, apiUrl, imgError }) {
                 </div>
                 <Link
                   to={`movie-details/${movie.id}`}
-                  className="block mt-1 text-lg leading-tight font-medium text-black hover:underline"
+                  className="block mt-1 text-lg leading-tight font-medium dark:text-blue-800 text-black hover:underline"
                 >
                   {movie.title}
                 </Link>

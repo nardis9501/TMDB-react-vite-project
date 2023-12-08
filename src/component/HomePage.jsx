@@ -74,20 +74,18 @@ export default function HomePage() {
 
   return (
     <>
-      <header className="my-4">
+      <section className="my-4">
         <h2 className="text-white/70 text-2xl">Welcome to </h2>
-        <h1 className="mb-3 text-4xl lg:text-6xl text-white/95">
-          The Movie Database
-        </h1>
+
         <h3 className="text-white/70 font-bold text-2xl">Popular movies</h3>
-      </header>
+      </section>
       <section>
         <div className="gap-3 place-content-center">
           <div className="grid lg:grid-cols-2 gap-5 sm:gap-3 lg:gap-7 place-content-center">
             <MovieCard movies={movies} apiUrl={url} imgError={imgError} />
           </div>
 
-          <div className="my-4">
+          <div className="mt-4 mb-2">
             <EarlyReturn isLoading={isLoading} error={error} data={movies}>
               <Button
                 className="w-2/3"
@@ -100,9 +98,6 @@ export default function HomePage() {
             </EarlyReturn>
           </div>
         </div>
-        <footer className="flex place-content-center items-center h-14 fixed bottom-0 left-0 right-0 backdrop-blur text-slate-900 bg-slate-200/40">
-          © Copyright 2023
-        </footer>
       </section>
     </>
   );

@@ -50,7 +50,10 @@ export default function MovieCard({ movies, apiUrl, imgError }) {
                   {text + "..."}
                 </p>
 
-                <Button variant="outlined" href={`movie-details/${movie.id}`}>
+                <Button
+                  variant="outlined"
+                  href={`/#/movie-details/${movie.id}`}
+                >
                   More
                 </Button>
               </div>

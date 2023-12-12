@@ -52,7 +52,7 @@ export default function MovieCard({ movies, apiUrl, imgError }) {
 
                 <Button
                   variant="outlined"
-                  href={`/#/movie-details/${movie.id}`}
+                  href={`/TMDB-react-vite-project/#/movie-details/${movie.id}`}
                 >
                   More
                 </Button>
